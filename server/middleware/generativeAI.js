@@ -77,6 +77,7 @@ const commonBasicSituations = {
     "sell assets",
   ],
 };
+
 const commonTradeOffs = { 
     "young-adult" : [ 
     "wanting to have fun while young",
@@ -127,9 +128,13 @@ const commonTradeOffs = {
         "sacrificing personal comfort and experiences to maintain financial stability versus indulging in experiences that may not be affordable"
     ]
 };
+
+
+const commonRandomScenarios = {"young-adult": ["you break an arm", "you got caught speeding", "you get a parking ticket", "you find 100 bucks on the floor"], "adult": ["you get addicted to drugs", "you develop a drinking problem", "you develop a smoking addiction"], "middle-aged": ["you develop a midlife crisis", "you get in a car crash", "you fall into a deep depression"], "elderly": ["you develop arthritis"]}
+
 async function generateRandomScenario(age, skillLevel, previousPrompts, category) {
 
-    const prompt = ``
+    const prompt = `Based on an age range, think of a scenario that deals with this category, and incorporates one of these basic situations.`
 }
 }
 module.exports = { firstQuestion }
