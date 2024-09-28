@@ -19,4 +19,4 @@ app.use("/", authRouter)
 // to-do: error handler
 
 const port = process.env.PORT || 3000
-app.listen(3000, () => console.log(`server runnning on port ${port}`))
+app.listen(port, "0.0.0.0", () => console.log(`server runnning on port ${port}`))
