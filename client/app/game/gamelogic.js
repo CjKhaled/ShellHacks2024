@@ -1,7 +1,7 @@
 // Add Prompt from GPT as Object for Functions
 // Pass in Correct Answer
 
-const age = 15;
+const age = 16;
 const start = true;
 const ageIncrement = 1;
 const previousPrompts = {};
