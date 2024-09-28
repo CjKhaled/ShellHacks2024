@@ -6,9 +6,61 @@ import Link from "next/link";
 const Page = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({ username: "", password: "" });
+  const [errors, setErrors] = useState<{ username?: string; password?: string }>({});
+
+  const validateForm = (name: string, value: string) => {
+    const newErrors = { ...errors };
+
+    if (name === "username") {
+      if (!value) {
+        newErrors.username = "Username is required.";
+      } else if (value.length < 8 || value.length > 15){
+          newErrors.username = "Username must be between 8 and 15 characters.";
+      } else if (!/^[A-Za-z]+$/.test(value)) { 
+        newErrors.username = "Username must contain only alphabetical characters.";
+    } else {
+      delete newErrors.username;
+    }
+  }
+
+    if (name === "password") {
+      let hasUppercase = false;
+      let hasLowercase = false;
+      let hasDigit = false;
+  
+      for (let i = 0; i < value.length; i++) {
+        const char = value[i];
+        if (char >= "A" && char <= "Z") hasUppercase = true;
+        if (char >= "a" && char <= "z") hasLowercase = true;
+        if (char >= "0" && char <= "9") hasDigit = true;
+      }
+
+      if (!value) {
+        newErrors.password = "Password is required.";
+      } else if (value.length < 8 || value.length > 15) {
+        newErrors.password = "Password must be between 8 and 15 characters long.";
+      } else if (hasDigit) { 
+        newErrors.password = "Password must contain only alphabetical characters.";
+      } else if (!hasUppercase) {
+        newErrors.password = "Password must contain an uppercase character.";
+      } else if (!hasLowercase) {
+        newErrors.password = "Password must contain a lowercase character.";
+      } else {
+        delete newErrors.password;
+      }
+    }
+
+    setErrors(newErrors);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // Final validation before submitting
+    if (!formData.username || !formData.password || Object.keys(errors).length > 0) {
+      return;
+    }
+
     try {
       const response = await fetch(
         "https://shellhacks2024-production.up.railway.app/login",
@@ -34,6 +86,9 @@ const Page = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+
+    // Validate the input in real time
+    validateForm(name, value);
   };
 
   return (
@@ -61,8 +116,13 @@ const Page = () => {
                 onChange={handleChange}
                 required
                 autoComplete="username"
-                className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className={`block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+                  errors.username ? "ring-red-500" : ""
+                }`}
               />
+              {errors.username && (
+                <p className="mt-2 text-sm text-red-600">{errors.username}</p>
+              )}
             </div>
           </div>
 
@@ -82,10 +142,16 @@ const Page = () => {
                 onChange={handleChange}
                 required
                 autoComplete="current-password"
-                className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className={`block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+                  errors.password ? "ring-red-500" : ""
+                }`}
               />
+              {errors.password && (
+                <p className="mt-2 text-sm text-red-600">{errors.password}</p>
+              )}
             </div>
           </div>
+
           <div>
             <button
               type="submit"
