@@ -1,5 +1,5 @@
 console.log("Test");
-const { checkCategory, fillPrompts, previousPrompts} = require('./gamelogic.js'); // Replace with your actual module file name
+const { checkCategory, fillPrompts, previousPrompts, incrementAge} = require('./gamelogic.js'); // Replace with your actual module file name
 // Manually test the `checkCategory` function
 function testCheckCategory() {
     const history = ["budgeting", "retirement planning", "insurance", "credit score", "financial scams"];

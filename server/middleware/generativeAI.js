@@ -5,8 +5,6 @@ const config = new Configuration({
 });
 const openai = new OpenAIApi(config);
 
-
-// PROMPT IS WORK IN PROGRESS
 async function firstQuestion(skill, history, categories, money) {
   const chosenCategory = determineCategory(categories, history);
   const prompt = `

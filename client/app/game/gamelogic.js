@@ -29,6 +29,7 @@ function incrementAge(ageIncrement) { // Sends a scenario based on age increment
         if (ageIncrement == 1) {
             const change = getRandomInt(2);
             if (change == 1) { // Corrected from change == 2
+                console.log("Check made it 50%");
                 ageIncrement = 1;
                 askScenario = true;
             } else {
@@ -75,4 +76,4 @@ function fillPrompts(prompt, category) {
     previousPrompts[prompt] = category;
 }
 
-module.exports = { checkCategory, fillPrompts, previousPrompts}; // Fixed incorrect export method
+module.exports = { checkCategory, fillPrompts, previousPrompts, incrementAge}; // Fixed incorrect export method
