@@ -1,4 +1,4 @@
-const { Configuration, OpenAIApi } = require('openai');
+const { Configuration, OpenAIApi } = require("openai");
 
 const config = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -19,70 +19,92 @@ async function firstQuestion(skill, history, categories, money) {
     1. Invest everything you have because YOLO!
     2. Consult your mom, who always gives sound financial advice... about getting a loan.
     3. Look up the company on Google to see if it has any bad reviews.
-    4. Pretend to be interested while planning to invest in a burrito instead. `
+    4. Pretend to be interested while planning to invest in a burrito instead. `;
 
-const ageRanges = {
-  "young-adult": "16-22",
-  "adult": "22-30",
-  "middle-aged": "30-50",
-  "elderly": "50-90",
-};
-const financialLiteracyPrinciples = [
-  "budgeting",
-  "discipline",
-  "insurance",
-  "mortgages",
-  "saving for emergencies",
-  "investing",
-];
-const commonBasicSituations = {
-  "young-adult": [
-    "get a part-time job",
-    "go to college",
-    "go into the military",
-    "buy a car",
-    "buy a credit card",
-    "get a boyfriend or girlfriend",
-    "go to a party",
-    "go to a concert",
-    "have kids",
-  ],
-  "adult": [
-    "get a full-time job",
-    "move out and rent your own place",
-    "pay off student loans",
-    "buy a car",
-    "get married",
-    "investment oppotunities",
-    "open a retirement savings account",
-    "handle unexpected expenses",
-    "buy a house",
-    "start a side hustle",
-    "have kids",
-  ],
-  "middle-aged": [
-    "buy a house",
-    "have kids",
-    "save for college fund",
-    "investment opportunities",
-    "start a business",
-    "move up corporate ladder",
-    "get married",
-    "get divorced",
-  ],
-  "elderly": [
-    "retire",
-    "travel",
-    "pay off debt",
-    "medical expenses",
-    "sell assets",
-  ],
-};
-const commonTradeOffs = { "young-adult": "wanting to have fun while young" };
-const commonRandomScenarios = {"young-adult": ["you break an arm", "you got caught speeding", "you get a parking ticket", "you find 100 bucks on the floor"], "adult": ["you get addicted to drugs", "you develop a drinking problem", "you develop a smoking addiction"], "middle-aged": ["you develop a midlife crisis", "you get in a car crash", "you fall into a deep depression"], "elderly": ["you develop arthritis"]}
-async function generateRandomScenario(age, skillLevel, previousPrompts, category) {
-
-    const prompt = `Based on an age range, think of a scenario that deals with this category, and incorporates one of these basic situations.`
+  const ageRanges = {
+    "young-adult": "16-22",
+    adult: "22-30",
+    "middle-aged": "30-50",
+    elderly: "50-90",
+  };
+  const financialLiteracyPrinciples = [
+    "budgeting",
+    "discipline",
+    "insurance",
+    "mortgages",
+    "saving for emergencies",
+    "investing",
+  ];
+  const commonBasicSituations = {
+    "young-adult": [
+      "get a part-time job",
+      "go to college",
+      "go into the military",
+      "buy a car",
+      "buy a credit card",
+      "get a boyfriend or girlfriend",
+      "go to a party",
+      "go to a concert",
+      "have kids",
+    ],
+    adult: [
+      "get a full-time job",
+      "move out and rent your own place",
+      "pay off student loans",
+      "buy a car",
+      "get married",
+      "investment oppotunities",
+      "open a retirement savings account",
+      "handle unexpected expenses",
+      "buy a house",
+      "start a side hustle",
+      "have kids",
+    ],
+    "middle-aged": [
+      "buy a house",
+      "have kids",
+      "save for college fund",
+      "investment opportunities",
+      "start a business",
+      "move up corporate ladder",
+      "get married",
+      "get divorced",
+    ],
+    elderly: [
+      "retire",
+      "travel",
+      "pay off debt",
+      "medical expenses",
+      "sell assets",
+    ],
+  };
+  const commonTradeOffs = { "young-adult": "wanting to have fun while young" };
+  const commonRandomScenarios = {
+    "young-adult": [
+      "you break an arm",
+      "you got caught speeding",
+      "you get a parking ticket",
+      "you find 100 bucks on the floor",
+    ],
+    adult: [
+      "you get addicted to drugs",
+      "you develop a drinking problem",
+      "you develop a smoking addiction",
+    ],
+    "middle-aged": [
+      "you develop a midlife crisis",
+      "you get in a car crash",
+      "you fall into a deep depression",
+    ],
+    elderly: ["you develop arthritis"],
+  };
+  async function generateRandomScenario(
+    age,
+    skillLevel,
+    previousPrompts,
+    category
+  ) {
+    const prompt = `Based on an age range, think of a scenario that deals with this category, and incorporates one of these basic situations.`;
+  }
 }
-}
-module.exports = { firstQuestion }
+module.exports = { firstQuestion };
