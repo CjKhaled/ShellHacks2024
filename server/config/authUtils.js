@@ -41,23 +41,6 @@ function issueJWT(user) {
   };
 }
 
-function issueInviteJWT(user) {
-  const payload = {
-    subUser: user.id,
-    iat: Date.now(),
-    iss: "shell-hacks",
-  };
-
-  const signedToken = jsonwebtoken.sign(payload, privateKey, {
-    expiresIn: "1h",
-    algorithm: "RS256",
-  });
-  return {
-    token: signedToken,
-    expiresIn: "1h",
-  };
-}
-
 function verifyJWT(token) {
   try {
     const decodedToken = jsonwebtoken.verify(token, publicKey, {

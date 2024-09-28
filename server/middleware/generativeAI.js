@@ -14,11 +14,12 @@ const commonBasicSituations = {
     'middle-aged': ['buy a house', 'have kids', 'save for college fund', 'investment opportunities', 'start a business', 'move up corporate ladder', 'get married', 'get divorced'],
     'elderly': ['retire', 'travel', 'pay off debt', 'medical expenses', 'sell assets']
 }
-const commonTradeOffs = ["losing time with loved ones", ""]
+const commonTradeOffs = {'young-adult': 'wanting to have fun while young'}
+const commonRandomScenarios = {'young-adult': ''}
 
 async function generateRandomScenario(age, skillLevel, previousPrompts, category) {
 
-    const prompt = ``
+    const prompt = `I am coding a generative AI for my fullstack web application (kinda like bitlife) to help all ages improve their financial literacy, with a fun twist on questions that depend on age, skill level, previous decisions. Try to tie the questions to the users balance, to make things difficult for them at varying money. Your goal is to generate prompts for our AI to acheive these goals. These are the parameters I have so far, what improvements would you make.`
 }
 
 async function generateQuestion() {
