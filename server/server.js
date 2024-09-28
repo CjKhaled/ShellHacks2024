@@ -1,9 +1,13 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const passport = require("passport");
 const cookieParser = require('cookie-parser')
 
+// todo corsOptions = {origin: frontend link, optionsSuccessStatus: 200}
+
+app.use(cors())
 app.use(cookieParser());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
