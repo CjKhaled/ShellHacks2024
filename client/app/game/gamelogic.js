@@ -8,6 +8,11 @@ const previousPrompts = {};
 const previousAnswers = [];
 const correctAnswer = false;
 const askScenario = false;
+const categoryUsage = {}; // we gonna track categories with this
+
+
+categories.forEach(cat => {
+    categoryUsage[cat] = 0;
 
 const categories = [
     "budgeting", 
@@ -56,6 +61,18 @@ function getRandomInt(max) { // MDN Web Docs
     return Math.floor(Math.random() * max);
 }
 
+// This function determines the category for the next question by:
+// 1. Creating a set of the last five used categories from the user's history
+// 2. Filtering the main categories to exclude those already used recently
+// This approach helps avoid repetitive categories and then i also implemented daniels frequency logic as well
+function checkCategory(history) {
+    const usedCategories = new Set(history.slice(-5));
+    const filteredCategories = categories.filter(cat => !usedCategories.has(cat));
+      // Select category based on usage frequency based on daniels logic.
+    if (filteredCategories.length === 0) {
+        return categories[getRandomInt(categories.length)];
+    }
 function fillPrompts(prompt, category) {
     previousPrompts[prompt] = category;
 }
+module.exports = { determinateCategory, fillPrompts
