@@ -5,7 +5,7 @@ const config = new Configuration({
 });
 const openai = new OpenAIApi(config);
 
-async function firstQuestion(skill, history, categories, money) {
+async function firstQuestion(age, history, categories, money) {
   const chosenCategory = determineCategory(categories, history);
   const prompt = `
     Generate a humorous financial literacy question for a 20-year-old user with a skill level of 3 out of 5, who has $${money}. 
@@ -16,10 +16,9 @@ async function firstQuestion(skill, history, categories, money) {
     
     Example format:
     Question: "You're at a party and someone offers you a 'once-in-a-lifetime' investment opportunity. What do you do?"
-    1. Invest everything you have because YOLO!
-    2. Consult your mom, who always gives sound financial advice... about getting a loan.
-    3. Look up the company on Google to see if it has any bad reviews.
-    4. Pretend to be interested while planning to invest in a burrito instead. `
+    1. Consult your mom, who always gives sound financial advice... about getting a loan.
+    2. Look up the company on Google to see if it has any bad reviews.
+    3. Pretend to be interested while planning to invest in a burrito instead. `
 
 const ageRanges = {
   "young-adult": "16-22",
@@ -78,8 +77,61 @@ const commonBasicSituations = {
     "sell assets",
   ],
 };
-const commonTradeOffs = { "young-adult": "wanting to have fun while young" };
+
+const commonTradeOffs = { 
+    "young-adult" : [ 
+    "wanting to have fun while young",
+    "saving for a future goal vs. spending on immediate experiences", 
+    "affording travel versus saving for a car", 
+    "investing in education vs. taking a gap year to work", 
+    "prioritizing social life expenses over savings", 
+    "buying trendy clothes versus building a professional wardrobe", 
+    "paying for subscriptions vs. saving for emergencies", 
+    "spending on dining out vs. cooking at home", 
+    "going out with friends vs. saving for a bigger purchase", 
+    "pursuing hobbies versus working extra hours for more income"
+    ],
+    "adult" : [
+        "sacrificing career advancement opportunities to maintain a work-life balance for mental health", 
+        "investing in a potentially profitable side hustle that could fail versus saving for a home down payment", 
+        "continuing to pay for expensive health insurance versus risking high out-of-pocket costs by going uninsured", 
+        "buying a new car that’s more reliable but incurs higher debt versus keeping an older car that may require costly repairs", 
+        "accepting a job that offers a substantial salary increase but requires relocating to a city with a higher cost of living", 
+        "supporting a friend’s startup with your savings, risking your financial stability versus potentially missing out on a rewarding experience", 
+        "taking a high-stress job for financial security versus pursuing a passion project that may not pay off immediately", 
+        "staying in a relationship that provides emotional support but complicates your financial situation versus breaking up for financial independence", 
+        "investing in continued education for a higher earning potential versus gaining hands-on experience in your current job", 
+        "committing to a retirement savings plan at the expense of current lifestyle choices that bring joy and fulfillment"
+    ], 
+    "middle-aged" : [
+        "allocating savings toward a child's college fund versus prioritizing retirement savings for your own future", 
+        "taking on a second mortgage for a rental property that could be a great investment versus paying off existing debt for financial peace", 
+        "continuing to support aging parents financially while trying to save for your children's future versus drawing boundaries to protect your own financial stability", 
+        "investing in a business opportunity with uncertain returns versus putting that money into a safe but low-interest savings account", 
+        "delaying necessary home repairs to save for an expensive vacation versus maintaining the value of your home", 
+        "changing careers for job satisfaction and passion versus staying in a secure job with benefits that you dislike", 
+        "purchasing a luxury item that enhances your lifestyle but strains your budget versus saving that money for emergencies", 
+        "contributing to a retirement account versus paying off student loans for your children", 
+        "diverting funds from retirement savings to pay for a family member's unexpected medical expenses versus risking your own retirement security", 
+        "deciding whether to stay in a stable job that pays well but is unfulfilling versus pursuing a riskier but more rewarding career path"
+    ],
+    "elderly" : [
+        "deciding whether to downsize to a smaller home for lower maintenance costs versus staying in a larger home filled with memories", 
+        "allocating retirement savings for healthcare expenses versus leaving an inheritance for children", 
+        "choosing to travel and enjoy retirement versus saving money for potential long-term care needs", 
+        "continuing to work part-time for extra income versus fully retiring to enjoy leisure time", 
+        "paying for expensive medications versus cutting back on other essential living expenses", 
+        "investing in a long-term care insurance policy versus self-funding healthcare costs out of retirement savings", 
+        "giving financial support to grandchildren for education versus saving for one's own unexpected expenses", 
+        "transferring assets to children to minimize estate taxes versus retaining control of assets for personal needs", 
+        "deciding whether to invest in home modifications for aging in place versus moving to a retirement community with care services", 
+        "sacrificing personal comfort and experiences to maintain financial stability versus indulging in experiences that may not be affordable"
+    ]
+};
+
+
 const commonRandomScenarios = {"young-adult": ["you break an arm", "you got caught speeding", "you get a parking ticket", "you find 100 bucks on the floor"], "adult": ["you get addicted to drugs", "you develop a drinking problem", "you develop a smoking addiction"], "middle-aged": ["you develop a midlife crisis", "you get in a car crash", "you fall into a deep depression"], "elderly": ["you develop arthritis"]}
+
 async function generateRandomScenario(age, skillLevel, previousPrompts, category) {
 
     const prompt = `Based on an age range, think of a scenario that deals with this category, and incorporates one of these basic situations.`
