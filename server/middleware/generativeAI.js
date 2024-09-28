@@ -23,9 +23,9 @@ async function firstQuestion(skill, history, categories, money) {
 
 const ageRanges = {
   "young-adult": "16-22",
-  adult: "22-30",
+  "adult": "22-30",
   "middle-aged": "30-50",
-  elderly: "50-90",
+  "elderly": "50-90",
 };
 const financialLiteracyPrinciples = [
   "budgeting",
@@ -47,7 +47,7 @@ const commonBasicSituations = {
     "go to a concert",
     "have kids",
   ],
-  adult: [
+  "adult": [
     "get a full-time job",
     "move out and rent your own place",
     "pay off student loans",
@@ -70,7 +70,7 @@ const commonBasicSituations = {
     "get married",
     "get divorced",
   ],
-  elderly: [
+  "elderly": [
     "retire",
     "travel",
     "pay off debt",
@@ -79,9 +79,10 @@ const commonBasicSituations = {
   ],
 };
 const commonTradeOffs = { "young-adult": "wanting to have fun while young" };
+const commonRandomScenarios = {"young-adult": ["you break an arm", "you got caught speeding", "you get a parking ticket", "you find 100 bucks on the floor"], "adult": ["you get addicted to drugs", "you develop a drinking problem", "you develop a smoking addiction"], "middle-aged": ["you develop a midlife crisis", "you get in a car crash", "you fall into a deep depression"], "elderly": ["you develop arthritis"]}
 async function generateRandomScenario(age, skillLevel, previousPrompts, category) {
 
-    const prompt = ``
+    const prompt = `Based on an age range, think of a scenario that deals with this category, and incorporates one of these basic situations.`
 }
 }
 module.exports = { firstQuestion }
