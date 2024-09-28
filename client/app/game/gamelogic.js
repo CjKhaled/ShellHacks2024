@@ -2,6 +2,7 @@ const age = 15;
 const start = true;
 let ageIncrement = 1; // Set as let for reassignment
 let askScenario = false;
+const accountBalance = 0;
 const previousPrompts = {};
 const previousAnswers = [];
 const correctAnswer = false;
@@ -74,6 +75,10 @@ function checkCategory(history) {
 // Fill previous prompts with category information
 function fillPrompts(prompt, category) {
     previousPrompts[prompt] = category;
+}
+
+function randomAccountBalance(accountBalance) {
+    return accountBalance = getRandomInt(10000);
 }
 
 module.exports = { checkCategory, fillPrompts, previousPrompts, incrementAge}; // Fixed incorrect export method
