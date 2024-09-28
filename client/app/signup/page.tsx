@@ -24,7 +24,7 @@ const Page = () => {
       if (response.status === 200) {
         router.push("/home");
       } else {
-        console.log("login failed");
+        console.log("signup failed");
       }
     } catch (error) {
       console.log(error);
