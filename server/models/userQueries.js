@@ -11,7 +11,7 @@ async function createNewUser(username, password) {
 
         return user
     } catch (error) {
-        throw new Error("Error creating new user.")
+        throw error
     }
 }
 
@@ -25,7 +25,7 @@ async function findUserById(id) {
 
         return user
     } catch (error) {
-        throw new Error("Error finding user")
+        throw error
     }
 }
 
@@ -39,7 +39,7 @@ async function deleteUser(id) {
 
         return user
     } catch (error) {
-        throw new Error("Error deleting user")
+        throw error
     }
 }
 
@@ -53,7 +53,7 @@ async function findUserByUsername(username) {
 
         return user
     } catch (error) {
-        throw new Error("Error finding user")
+        throw error
     }
 }
 

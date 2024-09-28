@@ -5,6 +5,12 @@ async function createNewUser(req, res, next) {
   // hash password
   try {
     const { username, password } = req.body;
+    const existingUser = await userDB.findUserByUsername(username);
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Username already exists." });
+    }
     const hashedPassword = await auth.hashPassword(password);
 
     // push into database, then give user JWT
