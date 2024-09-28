@@ -75,4 +75,4 @@ function checkCategory(history) {
 function fillPrompts(prompt, category) {
     previousPrompts[prompt] = category;
 }
-module.exports = { determinateCategory, fillPrompts
+module.exports = { determinateCategory, fillPrompts };
