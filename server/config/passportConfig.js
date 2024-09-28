@@ -1,6 +1,6 @@
 const fs = require("fs");
 const JwtStrategy = require("passport-jwt").Strategy;
-const userDB = require("../models/user");
+const userDB = require("../models/userQueries");
 const publicKey = fs.readFileSync(__dirname + "/keys/public.key", "utf8");
 
 // expecting JWT to come from cookie
@@ -23,7 +23,7 @@ const options = {
 // payload subfield should contain id of user
 const strategy = new JwtStrategy(options, async (payload, done) => {
   try {
-    const user = await userDB.findUserByID(payload.sub);
+    const user = await userDB.findUserById(payload.sub);
     if (user) {
       return done(null, user);
     } else {

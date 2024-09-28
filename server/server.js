@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 
 app.use(cookieParser());
 app.use(express.json())
-app.use(express.urlencoded({ extends: true }))
+app.use(express.urlencoded({ extended: true }))
 require('./config/passportConfig')(passport)
 
 const authRouter = require("./routes/authRoutes")
