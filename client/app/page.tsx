@@ -1,8 +1,6 @@
-
+'use client'
+import { useRouter } from "next/navigation";
 export default function Home() {
-  return (
-    <main>
-      <h1>OUR HOMEPAGE</h1>
-    </main>
-  );
+  const router = useRouter()
+  router.push('/signup')
 }
