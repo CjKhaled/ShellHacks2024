@@ -9,12 +9,14 @@ const cookieParser = require('cookie-parser')
 
 app.use(cors())
 app.use(cookieParser());
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-require('./config/passportConfig')(passport)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+require('./config/passportConfig')(passport);
 
-const authRouter = require("./routes/authRoutes")
+const authRouter = require("./routes/authRoutes");
+const userRouter = require("./routes/userRoutes")
 app.use("/", authRouter)
+app.use("/", userRouter)
 
 // to-do: error handler
 
