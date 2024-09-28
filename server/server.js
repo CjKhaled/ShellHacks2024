@@ -44,13 +44,13 @@ app.post('/updateSkill', (req, res) => {
   const user = users[userId];
 
 
-  if (scenarioId === 1) {
-    user.skillLevel += 10;  
-    user.financialStatus = "Improving";
-  } else if (scenarioId === 2) {
-    user.skillLevel -= 5;  
-    user.financialStatus = "Struggling";
-  }
+//   if (scenarioId === 1) {
+//     user.skillLevel += 10;  
+//     user.financialStatus = "Improving";
+//   } else if (scenarioId === 2) {
+//     user.skillLevel -= 5;  
+//     user.financialStatus = "Struggling";
+//   }
 
   res.json({ skillLevel: user.skillLevel, financialStatus: user.financialStatus });
 });
