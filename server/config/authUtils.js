@@ -64,5 +64,4 @@ module.exports = {
   compareHashes,
   issueJWT,
   verifyJWT,
-  issueInviteJWT,
 };
