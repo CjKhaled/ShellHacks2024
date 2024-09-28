@@ -3,12 +3,18 @@ import React, { useState } from "react";
 
 const page = () => {
   const [userName] = useState("John Doe");
-  const [age, setAge] = useState(18);
+  const [age, setAge] = useState(16);
   const [categories] = useState([
-    { name: "Budgeting", level: 1 },
-    { name: "Investing", level: 1 },
-    { name: "Credit", level: 1 },
-    { name: "Taxes", level: 1 },
+    {name: "Budgeting", level: 1},
+    {name: "Retirement Planning", level: 1},
+    {name: "Insurance", level: 1},
+    {name: "Credit Score", level: 1},
+    {name: "Financial Scams", level: 1},
+    {name: "Tax Planning", level: 1},
+    {name: "Investing", level: 1}, 
+    {name:"Debt Management", level: 1},
+    {name: "Emergency Fund", level: 1},
+    {name: "Inflation", level: 1},
   ]);
 
   return (
@@ -22,7 +28,7 @@ const page = () => {
           <p className="text-xl">Age: {age}</p>
         </main>
         <aside className="w-64 bg-green-200 p-4">
-          <h2 className="text-xl font-semibold mb-4">Financial Literacy</h2>
+          <h2 className="text-xl font-semibold mb-4">Financial Skills</h2>
           <ul>
             {categories.map((category, index) => (
               <li key={index} className="mb-2">

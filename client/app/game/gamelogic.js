@@ -10,16 +10,16 @@ const correctAnswer = false;
 const askScenario = false;
 
 const categories = [
-    "budgeting", 
-    "retirement planning", 
-    "insurance", 
-    "credit score", 
-    "financial scams", 
-    "tax planning", 
-    "investing", 
-    "debt management", 
-    "emergency fund", 
-    "inflation"
+    "Budgeting", 
+    "Retirement Planning", 
+    "Insurance", 
+    "Credit Score", 
+    "Financial Scams", 
+    "Tax Planning", 
+    "Investing", 
+    "Debt Management", 
+    "Emergency Fund", 
+    "Inflation"
 ];
   
 

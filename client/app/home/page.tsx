@@ -22,7 +22,7 @@ const page = () => {
             href={'/game'}
             className="mt-6 block bg-green-500 text-white text-center px-4 py-2 rounded hover:bg-green-600"
           >
-            Open Game
+            Start your Financial Future
           </Link>
         </div>
       </div>
