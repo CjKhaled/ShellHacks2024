@@ -1,8 +1,9 @@
-'use client'
+'use client';
+
 import React, { useState, useEffect } from "react";
 import Popup from "../components/Popup"
 import { useRouter } from 'next/navigation'
-import { User } from "lucide-react";
+import Avatar from './avatar'; 
 import DaScroll from "../components/ScrollDiv"
 
 const Page = () => {
@@ -47,12 +48,9 @@ const Page = () => {
     setGameState(prevState => ({
       ...prevState,
       age: prevState.age + 1,
-      // Here you can add logic to update the balance based on the user's actions
-      // For example:
-      // balance: prevState.balance + 100
+      balance: prevState.balance + 1000 // Example: earn $1000 per year
     }));
-    // Don't forget to update localStorage with the new balance
-    // localStorage.setItem('accountBalance', newBalance.toString())
+    localStorage.setItem('accountBalance', (gameState.balance + 1000).toString())
   };
 
   return (
@@ -60,8 +58,8 @@ const Page = () => {
       {/* Left column - User Profile */}
       <div className="w-1/4 p-4 flex flex-col items-center justify-start">
         <h1 className="text-2xl font-bold mb-6">{gameState.userName}</h1>
-        <div className="w-32 h-32 bg-gray-200 rounded-full mb-4 flex items-center justify-center">
-          <User size={80} className="text-gray-400" />
+        <div className="mb-4">
+          <Avatar balance={gameState.balance} />
         </div>
         <div className="text-center">
           <p className="text-xl mb-2">Age: {gameState.age}</p>

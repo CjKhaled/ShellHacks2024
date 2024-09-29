@@ -32,7 +32,7 @@ const Page = () => {
         <div className="min-h-screen bg-green-100">
             <div className="container mx-auto mt-8 p-4">
                 <div className="bg-white rounded-lg shadow-md p-6 max-w-md mx-auto">
-                    <h2 className="text-2xl font-semibold mb-4">Welcome, {userName}!</h2>
+                    <h2 className="text-2xl font-semibold mb-4 text-center">Welcome, {userName}!</h2>
                     <div className="flex justify-between items-center">
                         <div className="w-24 h-24 bg-gray-300 rounded-full">
                             {/* Character placeholder */}
