@@ -14,11 +14,12 @@ app.use(express.urlencoded({ extended: true }));
 require('./config/passportConfig')(passport);
 
 const authRouter = require("./routes/authRoutes");
-const userRouter = require("./routes/userRoutes")
+const genAIRouter = require("./routes/genAIRoutes")
+
 app.use("/", authRouter)
-app.use("/", userRouter)
+app.use("/", genAIRouter)
 
 // to-do: error handler
 
 const port = process.env.PORT || 3000
-app.listen(port, "0.0.0.0", () => console.log(`server runnning on port ${port}`))
+app.listen(port, "0.0.0.0", () => console.log("server runnning on port ${port}"))
