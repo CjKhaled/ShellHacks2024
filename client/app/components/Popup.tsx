@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import PopItems from "./PopItems";
+import PopHeader from "./PopHeader";
 
-const Popup = ({ isOpen }) => {
+const Popup = ({ isOpen, isSecond }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   async function getScenario(iage, ibackground, ibalance) {
@@ -15,7 +17,7 @@ const Popup = ({ isOpen }) => {
       })
     })
 
-    //const payload = response.json()
+    
   }
   
 
@@ -41,36 +43,20 @@ const Popup = ({ isOpen }) => {
       >
         <div className="flex flex-col space-y-8">
           
-          <h2 className="text-3xl font-bold mb-6">Question</h2>
-
-          
-          <div className="flex flex-col mb-6">
-            <h3 className="text-lg font-semibold">Category</h3>
-            <p className="text-gray-700">This is the category description.</p>
-          </div>
-
-          
-          <div className="flex flex-col space-y-6">
-            
+          {isSecond ? 
+          <div className="">
+            <h2>You have been pwnd.</h2>
             <button
               onClick={handlePillClick}
-              className="px-5 py-4 rounded-full bg-blue-200 text-blue-800 hover:bg-blue-300 transition"
+              className="px-5 py-4 rounded-full bg-blue-200 text-blue-800 hover:bg-blue-300 transition align-center justify-center"
             >
               Pill 1
             </button>
-            <button
-              onClick={handlePillClick}
-              className="px-5 py-4 rounded-full bg-green-200 text-green-800 hover:bg-green-300 transition"
-            >
-              Pill 2
-            </button>
-            <button
-              onClick={handlePillClick}
-              className="px-5 py-4 rounded-full bg-red-200 text-red-800 hover:bg-red-300 transition"
-            >
-              Pill 3
-            </button>
           </div>
+           : <PopHeader />}
+
+          {isSecond ? null : <PopItems handlePillClick={handlePillClick} />}
+          
         </div>
       </div>
     </div>
