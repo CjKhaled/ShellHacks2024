@@ -3,18 +3,35 @@ import React, { useState, useEffect } from "react";
 const Popup = ({ isOpen }) => {
   const [isVisible, setIsVisible] = useState(false);
 
+  async function getScenario(iage, ibackground, ibalance) {
+    const response = fetch("https://shellhacks2024-production.up.railway.app", {
+      method: 'POST', headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        age: iage,
+        background: ibackground,
+        balance: ibalance
+      })
+    })
+
+    //const payload = response.json()
+  }
+  
+
   useEffect(() => {
     setIsVisible(true); // Start the fade-in effect when popup is rendered
   }, []);
 
   // Handle click on pills with fade-out effect
   const handlePillClick = () => {
-    setIsVisible(false); 
+    setIsVisible(false);
     setTimeout(() => {
-      isOpen(false); 
-    }, 300); 
-  };
+      isOpen(false); // Close the first pop-up
+    }, 300);
 
+
+  };
   return (
     <div className="fixed inset-0 flex items-center justify-center transition-opacity duration-300">
       <div

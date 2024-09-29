@@ -5,6 +5,7 @@ import Popup from "../components/Popup"
 import { useRouter } from 'next/navigation'
 import Avatar from './avatar'; 
 import DaScroll from "../components/ScrollDiv"
+import deathChance from "./gamelogic.js"
 
 const Page = () => {
   const router = useRouter()
@@ -73,10 +74,10 @@ const Page = () => {
       </div>
       <div className="w-1/2 p-4 bg-white">
       <DaScroll/>
-        {isPopupOpen && <Popup isOpen={setIsPopupOpen} />}
+      {isPopupOpen && <Popup isOpen={setIsPopupOpen} />}
+
         {/* Add your main game content here */}
         <h2 className="text-2xl font-bold mb-4 text-center">Game Area</h2>
-        <p></p>
       </div>
 
       {/* Right column - Financial Skills */}
@@ -93,7 +94,7 @@ const Page = () => {
 
       <button
         onClick={() => {
-          handleAgeIncrement 
+          handleAgeIncrement() 
           setIsPopupOpen(true)
         }}
         className="fixed bottom-4 right-4 bg-blue-500 text-white rounded-full w-12 h-12 text-2xl"
