@@ -45,7 +45,7 @@ const Page = () => {
     setGameState(prevState => ({
       ...prevState,
       age: prevState.age + 1,
-      balance: prevState.balance + 1000 // Example: earn $1000 per year
+      balance: prevState.balance + 1000 // earn $1000 per year
     }));
     localStorage.setItem('accountBalance', (gameState.balance + 1000).toString())
   };
