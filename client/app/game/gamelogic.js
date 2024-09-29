@@ -1,4 +1,4 @@
-const { showDeathScene } = require('./deathscene.js');  // Importing showDeathScene
+// const { showDeathScene } = require('./deathscene.js');  // Importing showDeathScene
 
 const age = 16;
 let percentDeath = 0;

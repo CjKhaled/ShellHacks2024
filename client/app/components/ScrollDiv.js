@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import Event from './Event';
 import './DaScroll.css';
 
-const events = [
-    { year: '2000', description: 'Born in a small town and ready to rock' },
-    { year: '2005', description: 'Started school and loved learning.' },
-    { year: '2010', description: 'Moved to a new city.' },
-    { year: '2015', description: 'Graduated from high school.' },
-    { year: '2020', description: 'Got first job.' },
-    { year: '2025', description: 'Bought first car.' },
-    { year: '2030', description: 'Started a business.' },
-    { year: '2040', description: 'Retired and traveled the world.' }
-];
-
-const DaScroll = () => {
+const DaScroll = ({age, explanation}) => {
     const [scrollY, setScrollY] = useState(0);
     const [isVisible, setIsVisible] = useState(true);
+    const [ag]
 
     useEffect(() => {
         const handleScroll = () => {
@@ -36,10 +27,7 @@ const DaScroll = () => {
             <div className="timeline" style={{ transform: `translateY(${scrollY * 0.5}px)` }}></div>
             <div className="life-events">
                 {events.map((event, index) => (
-                    <div key={index} className="life-event" style={{ transform: `translateY(${scrollY * 0.1}px)` }}>
-                        <h2>{event.year}</h2>
-                        <p>{event.description}</p>
-                    </div>
+                    <Event index={index} age={year} explanation={explanation} />
                 ))}
             </div>
         </div>

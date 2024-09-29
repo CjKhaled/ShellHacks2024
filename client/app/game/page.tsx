@@ -65,10 +65,11 @@ const Page = () => {
     localStorage.setItem('accountBalance', (gameState.balance).toString())
   };
 
-const currentAge = gameState.age;
+const currentAge = gameState.age + 1;
 const currentBalance = gameState.balance;
+console.log(currentBalance);
   async function populatePopups() {
-    const data = await getScenario(currentAge, [] ,currentBalance);
+    const data = await getScenario(currentAge, [] ,);
     setChoiceOne(data.payload.choices.choice1[0])
     setChoiceTwo(data.payload.choices.choice2[0])
     setChoiceThree(data.payload.choices.choice3[0])
@@ -120,15 +121,15 @@ const currentBalance = gameState.balance;
       </div>
 
       {/* Middle column - Main game area */}
-      <div className="flex-grow flex flex-col justify-center items-center p-4">
+      <div className="flex-grow flex flex-col justify-center items-center p-4 ">
         
       </div>
       <div className="w-1/2 p-4 bg-white">
-      <DaScroll/>
+      {/* <DaScroll/> */}
         {isPopupOpen && <Popup isOpen={handlePopupClose} explanation={explanation} isSecond={false} choiceOne={choiceOne} choiceTwo={choiceTwo} choiceThree={choiceThree} scenario={scenario} category={category} setEndResult={setEndResult}/>}
         {isSecondPopupOpen && <Popup isOpen={handlePopup2Close} explanation={explanation} isSecond={true} choiceOne={choiceOne} choiceTwo={choiceTwo} choiceThree={choiceThree} scenario={scenario} category={category} setEndResult={setEndResult} />}
         {/* Add your main game content here */}
-        <h2 className="text-2xl font-bold mb-4 text-center">Game Area</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Click The Button To Start!</h2>
       </div>
 
       {/* Right column - Financial Skills */}
@@ -145,7 +146,6 @@ const currentBalance = gameState.balance;
 
       <button
         onClick={() => {
-          handleAgeIncrement() 
           setIsPopupOpen(true)
           setWaitForPopup(true)
           populatePopups()
