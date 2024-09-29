@@ -98,7 +98,6 @@ const Page = () => {
 
       <button
         onClick={() => {
-          handleAgeIncrement() 
           setIsPopupOpen(true)
         }}
         className="fixed bottom-4 right-4 bg-blue-500 text-white rounded-full w-12 h-12 text-2xl"
