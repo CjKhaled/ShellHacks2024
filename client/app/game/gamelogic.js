@@ -81,7 +81,7 @@ function fillPrompts(prompt, category) {
 }
 
 function randomAccountBalance(accountBalance) {
-    return accountBalance = getRandomInt(10000);
+    return getRandomInt(10000);
 }
 
-module.exports = { checkCategory, fillPrompts, previousPrompts, incrementAge}; // Fixed incorrect export method
+module.exports = { checkCategory, fillPrompts, previousPrompts, incrementAge, randomAccountBalance}; 
