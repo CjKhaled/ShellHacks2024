@@ -1,10 +1,13 @@
 'use client'
 import React, { useState, useEffect } from "react";
+import Popup from "../components/Popup"
 import { useRouter } from 'next/navigation'
 import { User } from "lucide-react";
+import DaScroll from "../components/ScrollDiv"
 
 const Page = () => {
   const router = useRouter()
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [gameState, setGameState] = useState({
     userName: "User",
     balance: 0,
@@ -67,10 +70,15 @@ const Page = () => {
       </div>
 
       {/* Middle column - Main game area */}
+      <div className="flex-grow flex flex-col justify-center items-center p-4">
+        
+      </div>
       <div className="w-1/2 p-4 bg-white">
+      <DaScroll/>
+        {isPopupOpen && <Popup isOpen={setIsPopupOpen} />}
         {/* Add your main game content here */}
         <h2 className="text-2xl font-bold mb-4 text-center">Game Area</h2>
-        <p>Game content goes here.</p>
+        <p></p>
       </div>
 
       {/* Right column - Financial Skills */}
@@ -86,7 +94,10 @@ const Page = () => {
       </div>
 
       <button
-        onClick={handleAgeIncrement}
+        onClick={() => {
+          handleAgeIncrement 
+          setIsPopupOpen(true)
+        }}
         className="fixed bottom-4 right-4 bg-blue-500 text-white rounded-full w-12 h-12 text-2xl"
       >
         +
