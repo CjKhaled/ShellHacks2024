@@ -10,11 +10,11 @@ const Navbar = ({ userInitials = "", skillLevel = 0 }) => {
       <div className="flex items-center">
         <span className="mr-2 text-xl">💰</span>
         <Link href={'/home'} className="text-xl font-bold">
-          Future Finance
+          FinSavvy
         </Link>
       </div>
       <div className="flex items-center">
-        <span className="mr-4">Skill Level: {skillLevel}</span>
+        <span className="mr-44">Skill Level: {skillLevel}</span>
         <div className="bg-white text-green-600 rounded-full w-8 h-8 flex items-center justify-center">
           {userInitials ? (
             userInitials
