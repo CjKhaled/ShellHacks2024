@@ -1,11 +1,5 @@
-const { Configuration, OpenAIApi } = require("openai");
-require('dotenv').require()
 
-const config = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-const openai = new OpenAIApi(config);
+require('dotenv').config()
 
 const ageRanges = {
   "young-adult": "16-22",
@@ -118,26 +112,82 @@ const commonTradeOffs = {
 
 const commonRandomScenarios = {"young-adult": ["you break an arm", "you got caught speeding", "you get a parking ticket", "you find 100 bucks on the floor"], "adult": ["you get addicted to drugs", "you develop a drinking problem", "you develop a smoking addiction"], "middle-aged": ["you develop a midlife crisis", "you get in a car crash", "you fall into a deep depression"], "elderly": ["you develop arthritis"]}
 
-async function generateRegularScenario(age, background, category, balance) {
+
+function determineAgeGroupRange(age) {
+  for (const [key, range] of Object.entries(ageRanges)) {
+    const [min, max] = range.split("-").map(Number);
+    if (age >= min && age <= max) {
+      return range;
+    }
+  }
+}
+
+function determineAgeGroup(age) {
+    for (const [key, range] of Object.entries(ageRanges)) {
+      const [min, max] = range.split("-").map(Number);
+      if (age >= min && age <= max) {
+        return key;
+      }
+    }
+}
+
+async function generateRegularScenario(age, category, background, balance) {
+    const ageGroup = determineAgeGroup(age)
+    const situations = commonBasicSituations[ageGroup].join(", ")
+    const tradeOffs = commonTradeOffs[ageGroup].join(", ")
     const prompt = `
     Create a life scenario that incorporates a question for a user in a life simulation game like BitLife.
-    The user is in the age group ${age} and currently has ${balance}.
+    The user is in the age group ${determineAgeGroupRange(
+      age
+    )} and currently has ${balance}.
     Consider and take advantage of their background and their balance so that a scenario is logically plausible. Their background is ${background}
-    Create a situation from their age group, taking inspiration from the commonBasicSituations.
-    Introduce this trade-off that fits this situation which they must consider, taking inspiration from commonTradeOffs that fits the age group.
+    Create a situation from their age group, taking inspiration from this list ${situations}.
+    Introduce a trade-off that fits this situation which they must consider, taking inspiration from this list ${tradeOffs}.
     Incorporate this financial literacy principle ${category} into the scenario.
     Provide three choices for the player, one which increases the character's balance (even by a small amount), one that removes money but can bring other benefits, and one that is either a neutral or risky choice that could add or subtract from the balance.
+    Make sure the data is output in json, in this format: {
+    scenario: "scenario text",
+    choices: {
+        choice: ["choice text", "description of choice", "monetary consequence of choice"],
+        choice: ["choice text", "description of choice", "monetary consequence of choice"],
+        choice: ["choice text", "description of choice", "monetary consequence of choice"]
+    }
+}
+    Ensure the data is in json format for direct use in code.
     Ensure each choice is enjoyable and presents a consequence, either positive or negative, to make the game engaging.
     `;
 
-    const response = await openai.createCompletion({
-        model: "gpt-4",
-        prompt: prompt,
-        max_tokens: 300,
-    })
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.OPENAI_TOKEN}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+        temperature: 0.7,
+      }),
+    });
 
-    return response.data.choices[0].text.trim()
+    if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`)
+    }
+
+    const data = await response.json()
+
+    return data.choices[0].message.content
   }
 
+  async function generateRandomScenario(age, background, balance) {}
 
-module.exports = generateRegularScenario
+
+module.exports = {
+    generateRegularScenario,
+    generateRandomScenario
+}

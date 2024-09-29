@@ -1,4 +1,9 @@
-const age = 15;
+// Add Prompt from GPT as Object for Functions
+// Pass in Correct Answer
+import Popup from "../components/Popup"
+import Page from "../game/page"
+const age = 16;
+let percentDeath = 0;
 const start = true;
 let ageIncrement = 1; // Set as let for reassignment
 let askScenario = false;
@@ -9,15 +14,15 @@ const correctAnswer = false;
 const categoryUsage = {}; // We are going to track categories with this
 
 const categories = [
-    "budgeting",
-    "retirement planning",
-    "insurance",
-    "credit score",
-    "financial scams",
-    "tax planning",
-    "investing",
-    "debt management",
-    "emergency fund",
+    "budgeting", 
+    "retirement planning", 
+    "insurance", 
+    "credit score", 
+    "financial scams", 
+    "tax planning", 
+    "investing", 
+    "debt management", 
+    "emergency fund", 
     "inflation"
 ];
 
@@ -78,7 +83,23 @@ function fillPrompts(prompt, category) {
 }
 
 function randomAccountBalance(accountBalance) {
-    return accountBalance = getRandomInt(10000);
+    return getRandomInt(10000);
 }
 
-module.exports = { checkCategory, fillPrompts, previousPrompts, incrementAge}; // Fixed incorrect export method
+function deathChance() {
+    if (age >= 60) {
+        percentDeath += 0.05; 
+    }
+    const deathRoll = Math.random();  
+    if (deathRoll < percentDeath) {
+        console.log("Character has died.");
+        return true;  
+    } else {
+        console.log("Character survives.");
+        return false;
+    }
+}
+let empty = [];
+getScenario(age, empty , user.accountBalance)
+
+module.exports = { checkCategory, fillPrompts, previousPrompts, incrementAge, randomAccountBalance, deathChance}; 

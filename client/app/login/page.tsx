@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -56,7 +56,6 @@ const Page = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Final validation before submitting
     if (!formData.username || !formData.password || Object.keys(errors).length > 0) {
       return;
     }
@@ -74,7 +73,8 @@ const Page = () => {
       );
 
       if (response.status === 200) {
-        router.push("/home");
+        localStorage.setItem('username', formData.username);
+        router.push('/home');
       } else {
         console.log("login failed");
       }
