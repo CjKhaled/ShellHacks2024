@@ -130,8 +130,14 @@ async function generateRegularScenario(age, background, category, balance) {
     Ensure each choice is enjoyable and presents a consequence, either positive or negative, to make the game engaging.
     `;
 
-    
+    const response = await openai.createCompletion({
+        model: "gpt-4",
+        prompt: prompt,
+        max_tokens: 300,
+    })
+
+    return response.data.choices[0].text.trim()
 }
 
 
-module.exports = { firstQuestion }
+module.exports = generateRegularScenario
