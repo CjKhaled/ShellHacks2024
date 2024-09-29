@@ -10,7 +10,7 @@ const Page = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await fetch(
+      const response = await fetch (
         "https://shellhacks2024-production.up.railway.app/signup",
         {
           method: "POST",

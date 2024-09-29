@@ -5,6 +5,7 @@ import Popup from "../components/Popup"
 import { useRouter } from 'next/navigation'
 import Avatar from './avatar'; 
 import DaScroll from "../components/ScrollDiv"
+import { getScenario } from "./gamelogic.js";
 import deathChance from "./gamelogic.js"
 import { truncate } from "fs";
 
@@ -56,6 +57,12 @@ const Page = () => {
     }));
     localStorage.setItem('accountBalance', (gameState.balance).toString())
   };
+
+  async function test() {
+    await getScenario(19, [], 0);
+  }
+
+  test()
 
   const handlePopupClose = () => {
     setIsPopupOpen(false);

@@ -1,7 +1,5 @@
 // Add Prompt from GPT as Object for Functions
 // Pass in Correct Answer
-import Popup from "../components/Popup"
-import Page from "../game/page"
 const age = 16;
 let percentDeath = 0;
 const start = true;
@@ -99,7 +97,22 @@ function deathChance() {
         return false;
     }
 }
-let empty = [];
-getScenario(age, empty , user.accountBalance)
 
-module.exports = { checkCategory, fillPrompts, previousPrompts, incrementAge, randomAccountBalance, deathChance}; 
+let empty = [];
+async function getScenario(iage, ibackground, ibalance) {
+    const response = await fetch("https://shellhacks2024-production.up.railway.app/regular-scenario", {
+      method: 'POST', headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        age: iage,
+        background: ibackground,
+        balance: ibalance
+      })
+    })
+    console.log(response)
+    return response
+    
+  }
+
+module.exports = { checkCategory, fillPrompts, previousPrompts, incrementAge, randomAccountBalance, deathChance, getScenario}; 
