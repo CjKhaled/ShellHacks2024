@@ -1,7 +1,9 @@
 // Add Prompt from GPT as Object for Functions
 // Pass in Correct Answer
-
+import Popup from "../components/Popup"
+import Page from "../game/page"
 const age = 16;
+let percentDeath = 0;
 const start = true;
 let ageIncrement = 1; // Set as let for reassignment
 let askScenario = false;
@@ -84,4 +86,20 @@ function randomAccountBalance(accountBalance) {
     return getRandomInt(10000);
 }
 
-module.exports = { checkCategory, fillPrompts, previousPrompts, incrementAge, randomAccountBalance}; 
+function deathChance() {
+    if (age >= 60) {
+        percentDeath += 0.05; 
+    }
+    const deathRoll = Math.random();  
+    if (deathRoll < percentDeath) {
+        console.log("Character has died.");
+        return true;  
+    } else {
+        console.log("Character survives.");
+        return false;
+    }
+}
+let empty = [];
+getScenario(age, empty , user.accountBalance)
+
+module.exports = { checkCategory, fillPrompts, previousPrompts, incrementAge, randomAccountBalance, deathChance}; 
