@@ -1,3 +1,4 @@
+
 require('dotenv').config()
 
 const ageRanges = {
@@ -110,6 +111,7 @@ const commonTradeOffs = {
 };
 
 const commonRandomScenarios = {"young-adult": ["you break an arm", "you got caught speeding", "you get a parking ticket", "you find 100 bucks on the floor"], "adult": ["you get addicted to drugs", "you develop a drinking problem", "you develop a smoking addiction"], "middle-aged": ["you develop a midlife crisis", "you get in a car crash", "you fall into a deep depression"], "elderly": ["you develop arthritis"]}
+
 
 function determineAgeGroupRange(age) {
   for (const [key, range] of Object.entries(ageRanges)) {
