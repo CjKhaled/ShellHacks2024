@@ -137,7 +137,7 @@ async function generateRegularScenario(age, background, category, balance) {
     })
 
     return response.data.choices[0].text.trim()
-}
+  }
 
 
 module.exports = generateRegularScenario
