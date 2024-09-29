@@ -48,9 +48,14 @@ const Page = () => {
     setGameState(prevState => ({
       ...prevState,
       age: prevState.age + 1,
-      balance: prevState.balance + 1000 // earn $1000 per year
+      balance: prevState.balance
     }));
-    localStorage.setItem('accountBalance', (gameState.balance + 1000).toString())
+    localStorage.setItem('accountBalance', (gameState.balance).toString())
+  };
+
+  const handlePopupClose = () => {
+    setIsPopupOpen(false);
+    handleAgeIncrement();
   };
 
   return (
@@ -73,7 +78,7 @@ const Page = () => {
       </div>
       <div className="w-1/2 p-4 bg-white">
       <DaScroll/>
-        {isPopupOpen && <Popup isOpen={setIsPopupOpen} />}
+        {isPopupOpen && <Popup isOpen={handlePopupClose} />}
         {/* Add your main game content here */}
         <h2 className="text-2xl font-bold mb-4 text-center">Game Area</h2>
         <p></p>
@@ -93,7 +98,6 @@ const Page = () => {
 
       <button
         onClick={() => {
-          handleAgeIncrement 
           setIsPopupOpen(true)
         }}
         className="fixed bottom-4 right-4 bg-blue-500 text-white rounded-full w-12 h-12 text-2xl"
