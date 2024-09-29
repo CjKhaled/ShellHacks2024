@@ -6,10 +6,13 @@ import { useRouter } from 'next/navigation'
 import Avatar from './avatar'; 
 import DaScroll from "../components/ScrollDiv"
 import deathChance from "./gamelogic.js"
+import { truncate } from "fs";
 
 const Page = () => {
   const router = useRouter()
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [waitForPopup, setWaitForPopup] = useState(false)
+  const [isSecondPopupOpen, setIsSecondPopupOpen] = useState(false);
   const [gameState, setGameState] = useState({
     userName: "User",
     balance: 0,
@@ -56,9 +59,16 @@ const Page = () => {
 
   const handlePopupClose = () => {
     setIsPopupOpen(false);
+    if (waitForPopup) {
+      setWaitForPopup(false)
+      setIsSecondPopupOpen(true)
+    }
     handleAgeIncrement();
   };
 
+  const handlePopup2Close = () => {
+    setIsSecondPopupOpen(false);
+  };
   return (
     <div className="min-h-screen bg-green-100 flex">
       {/* Left column - User Profile */}
@@ -79,7 +89,8 @@ const Page = () => {
       </div>
       <div className="w-1/2 p-4 bg-white">
       <DaScroll/>
-        {isPopupOpen && <Popup isOpen={handlePopupClose} />}
+        {isPopupOpen && <Popup isOpen={handlePopupClose} isSecond={false} />}
+        {isSecondPopupOpen && <Popup isOpen={handlePopup2Close} isSecond={true} />}
         {/* Add your main game content here */}
         <h2 className="text-2xl font-bold mb-4 text-center">Game Area</h2>
       </div>
@@ -100,6 +111,7 @@ const Page = () => {
         onClick={() => {
           handleAgeIncrement() 
           setIsPopupOpen(true)
+          setWaitForPopup(true)
         }}
         className="fixed bottom-4 right-4 bg-blue-500 text-white rounded-full w-12 h-12 text-2xl"
       >
