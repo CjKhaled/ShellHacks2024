@@ -6,7 +6,7 @@ const Popup = ({ isOpen, isSecond }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   async function getScenario(iage, ibackground, ibalance) {
-    const response = fetch("https://shellhacks2024-production.up.railway.app", {
+    const response = fetch("https://shellhacks2024-production.up.railway.app/", {
       method: 'POST', headers: {
         "Content-Type": "application/json"
       },
