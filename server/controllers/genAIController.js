@@ -12,8 +12,8 @@ function parseScenario(jsonString) {
 
 async function sendRegularScenario(req, res) {
     try {
-        const { age, background, balance, category } = req.body
-        const payload = await genAI.generateRegularScenario(age, background, balance, category)
+        const { age, background, balance } = req.body
+        const payload = await genAI.generateRegularScenario(age, background, balance)
         const formattedPayload = parseScenario(payload)
         res.json({success: true, payload: formattedPayload})
     } catch (error) {

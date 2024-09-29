@@ -80,7 +80,7 @@ function fillPrompts(prompt, category) {
     previousPrompts[prompt] = category;
 }
 
-function randomAccountBalance(accountBalance) {
+function randomAccountBalance() {
     return getRandomInt(10000);
 }
 
@@ -98,10 +98,10 @@ function deathChance() {
     }
 }
 
-let empty = [];
 async function getScenario(iage, ibackground, ibalance) {
     const response = await fetch("https://shellhacks2024-production.up.railway.app/regular-scenario", {
-      method: 'POST', headers: {
+      method: 'POST',
+      headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -109,10 +109,17 @@ async function getScenario(iage, ibackground, ibalance) {
         background: ibackground,
         balance: ibalance
       })
-    })
-    console.log(response)
-    return response
+    });
+  
+    // Await the JSON parsing
+    const data = await response.json();
     
+    // Log the data
+    console.log(data);
+    
+    // Return the parsed data
+    return data;
   }
+  
 
 module.exports = { checkCategory, fillPrompts, previousPrompts, incrementAge, randomAccountBalance, deathChance, getScenario}; 
