@@ -5,13 +5,21 @@ import Popup from "../components/Popup"
 import { useRouter } from 'next/navigation'
 import Avatar from './avatar'; 
 import DaScroll from "../components/ScrollDiv"
+import { getScenario, randomAccountBalance } from "./gamelogic.js";
 import deathChance from "./gamelogic.js"
 import { truncate } from "fs";
 
 const Page = () => {
   const router = useRouter()
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [waitForPopup, setWaitForPopup] = useState(false)
+  const [waitForPopup, setWaitForPopup] = useState(false);
+  const [choiceOne, setChoiceOne] = useState('');
+  const [choiceTwo, setChoiceTwo] = useState('');
+  const [choiceThree, setChoiceThree] = useState('');
+  const [scenario, setScenario] = useState('');
+  const [explanation, setExplanation] = useState('');
+  const [category, setCategory] = useState('');
+  const [consequence, setConsequence] = useState('');
   const [isSecondPopupOpen, setIsSecondPopupOpen] = useState(false);
   const [gameState, setGameState] = useState({
     userName: "User",
@@ -57,6 +65,35 @@ const Page = () => {
     localStorage.setItem('accountBalance', (gameState.balance).toString())
   };
 
+const currentAge = gameState.age + 1;
+const currentBalance = gameState.balance;
+console.log(currentBalance);
+  async function populatePopups() {
+    const data = await getScenario(currentAge, [] ,);
+    setChoiceOne(data.payload.choices.choice1[0])
+    setChoiceTwo(data.payload.choices.choice2[0])
+    setChoiceThree(data.payload.choices.choice3[0])
+    setScenario(data.payload.scenario)
+    setCategory(data.payload.category)
+    
+  }
+
+  async function setEndResult(id) {
+    const data = await getScenario(currentAge, [], currentBalance);
+    if (id == "1") {
+      setExplanation(data.payload.choices.choice1[1]);
+      setConsequence(data.payload.choices.choice1[2]);
+    } else if (id == "2") {
+      setExplanation(data.payload.choices.choice2[1]);
+      setConsequence(data.payload.choices.choice2[2]);
+    } else if (id =="3") {
+      setExplanation(data.payload.choices.choice3[1]);
+      setConsequence(data.payload.choices.choice3[2]);
+    } else {
+      return;
+    }
+  }
+
   const handlePopupClose = () => {
     setIsPopupOpen(false);
     if (waitForPopup) {
@@ -84,15 +121,15 @@ const Page = () => {
       </div>
 
       {/* Middle column - Main game area */}
-      <div className="flex-grow flex flex-col justify-center items-center p-4">
+      <div className="flex-grow flex flex-col justify-center items-center p-4 ">
         
       </div>
       <div className="w-1/2 p-4 bg-white">
-      <DaScroll/>
-        {isPopupOpen && <Popup isOpen={handlePopupClose} isSecond={false} />}
-        {isSecondPopupOpen && <Popup isOpen={handlePopup2Close} isSecond={true} />}
+      {/* <DaScroll/> */}
+        {isPopupOpen && <Popup isOpen={handlePopupClose} explanation={explanation} isSecond={false} choiceOne={choiceOne} choiceTwo={choiceTwo} choiceThree={choiceThree} scenario={scenario} category={category} setEndResult={setEndResult}/>}
+        {isSecondPopupOpen && <Popup isOpen={handlePopup2Close} explanation={explanation} isSecond={true} choiceOne={choiceOne} choiceTwo={choiceTwo} choiceThree={choiceThree} scenario={scenario} category={category} setEndResult={setEndResult} />}
         {/* Add your main game content here */}
-        <h2 className="text-2xl font-bold mb-4 text-center">Game Area</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Click The Button To Start!</h2>
       </div>
 
       {/* Right column - Financial Skills */}
@@ -111,6 +148,7 @@ const Page = () => {
         onClick={() => {
           setIsPopupOpen(true)
           setWaitForPopup(true)
+          populatePopups()
         }}
         className="fixed bottom-4 right-4 bg-blue-500 text-white rounded-full w-12 h-12 text-2xl"
       >

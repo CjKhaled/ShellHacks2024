@@ -2,23 +2,8 @@ import React, { useState, useEffect } from "react";
 import PopItems from "./PopItems";
 import PopHeader from "./PopHeader";
 
-const Popup = ({ isOpen, isSecond }) => {
+const Popup = ({ isOpen, isSecond, choiceOne, choiceTwo, choiceThree, scenario, setEndResult, category, explanation  }) => {
   const [isVisible, setIsVisible] = useState(false);
-
-  async function getScenario(iage, ibackground, ibalance) {
-    const response = fetch("https://shellhacks2024-production.up.railway.app", {
-      method: 'POST', headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        age: iage,
-        background: ibackground,
-        balance: ibalance
-      })
-    })
-
-    
-  }
   
 
   useEffect(() => {
@@ -28,6 +13,7 @@ const Popup = ({ isOpen, isSecond }) => {
   // Handle click on pills with fade-out effect
   const handlePillClick = () => {
     setIsVisible(false);
+
     setTimeout(() => {
       isOpen(false); // Close the first pop-up
     }, 300);
@@ -45,17 +31,17 @@ const Popup = ({ isOpen, isSecond }) => {
           
           {isSecond ? 
           <div className="">
-            <h2>You have been pwnd.</h2>
+            <h2>{explanation}</h2>
             <button
               onClick={handlePillClick}
               className="px-5 py-4 rounded-full bg-blue-200 text-blue-800 hover:bg-blue-300 transition align-center justify-center"
             >
-              Pill 1
+              Close
             </button>
           </div>
-           : <PopHeader />}
+           : <PopHeader category={category} scenario={scenario} />}
 
-          {isSecond ? null : <PopItems handlePillClick={handlePillClick} />}
+          {isSecond ? null : <PopItems setEndResult={setEndResult} choiceOne={choiceOne} choiceTwo={choiceTwo} choiceThree={choiceThree} handlePillClick={handlePillClick} />}
           
         </div>
       </div>

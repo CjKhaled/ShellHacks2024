@@ -139,7 +139,7 @@ async function generateRegularScenario(age, category, background, balance) {
     Create a life scenario that incorporates a question for a user in a life simulation game like BitLife.
     The user is in the age group ${determineAgeGroupRange(
       age
-    )} and currently has ${balance}.
+    )} and is ${age} years old and currently has ${balance}.
     Consider and take advantage of their background and their balance so that a scenario is logically plausible. Their background is ${background}
     Create a situation from their age group, taking inspiration from this list ${situations}.
     Introduce a trade-off that fits this situation which they must consider, taking inspiration from this list ${tradeOffs}.
